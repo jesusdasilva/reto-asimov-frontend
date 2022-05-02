@@ -1,7 +1,7 @@
 <script setup>
-import { inject } from "vue";
+import { inject } from "vue"
 
-const { onSubmit, state } = inject("state");
+const { onSubmit, state } = inject("state")
 </script>
 
 <template>

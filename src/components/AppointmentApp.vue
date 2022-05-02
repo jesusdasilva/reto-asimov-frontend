@@ -1,10 +1,10 @@
 <script setup>
-import { provide, ref, reactive } from "vue";
-import AppointmentCalendar from "@/components/AppointmentCalendar.vue";
-import AppointmentTime from "@/components/AppointmentTime.vue";
-import AppointmentForm from "@/components/AppointmentForm.vue";
+import { provide, ref, reactive } from "vue"
+import AppointmentCalendar from "@/components/AppointmentCalendar.vue"
+import AppointmentTime from "@/components/AppointmentTime.vue"
+import AppointmentForm from "@/components/AppointmentForm.vue"
 
-const showForm = ref(false);
+const showForm = ref(false)
 const state = reactive({
   startDate: new Date("Apr 30, 2000"),
   disabledDates: [{ weekdays: [1, 7] }, { days: [] }],
@@ -19,27 +19,27 @@ const state = reactive({
     time: "",
     date: ""
   }
-});
+})
 
 function onDayClick(date) {
-  setDisabledDay(date.day);
+  setDisabledDay(date.day)
 }
 
 function onTimeClick(time) {
-  setDisabledTime(time.time);
+  setDisabledTime(time.time)
 }
 
 function changeShowForm() {
-  showForm.value = !showForm.value;
+  showForm.value = !showForm.value
 }
 
 function setDisabledDay(day) {
-  state.disabledDates[1].days.push(day);
+  state.disabledDates[1].days.push(day)
 }
 
 function onSubmit() {
-  console.log(state.data);
-  changeShowForm();
+//   console.log(state.data)
+  changeShowForm()
 }
 
 provide("state", {
@@ -48,7 +48,7 @@ provide("state", {
   onTimeClick,
   changeShowForm,
   onSubmit
-});
+})
 </script>
 
 <template>
