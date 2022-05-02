@@ -1,4 +1,5 @@
 <script setup>
+import moment from "moment"
 import { provide, ref, reactive } from "vue"
 import AppointmentCalendar from "@/components/AppointmentCalendar.vue"
 import AppointmentTime from "@/components/AppointmentTime.vue"
@@ -6,7 +7,7 @@ import AppointmentForm from "@/components/AppointmentForm.vue"
 
 const showForm = ref(false)
 const state = reactive({
-  startDate: new Date("Apr 30, 2000"),
+  startDate: moment('2022-01-05 00:00:00').format(),
   disabledDates: [{ weekdays: [1, 7] }, { days: [] }],
   officeHours: {
     start: "9:00",
@@ -22,6 +23,8 @@ const state = reactive({
 })
 
 function onDayClick(date) {
+  console.log('date.date',date.date)
+  console.log('date',date)
   setDisabledDay(date.day)
 }
 
@@ -30,7 +33,8 @@ function onTimeClick(time) {
 }
 
 function changeShowForm() {
-  showForm.value = !showForm.value
+  // showForm.value = !showForm.value
+  state.startDate = moment('2022-05-10 00:00:00').format()
 }
 
 function setDisabledDay(day) {
