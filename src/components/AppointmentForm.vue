@@ -45,7 +45,10 @@ const { onSubmit, state } = inject("state")
         v-model="state.data.email"
       />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div>
+      <button type="reset" class="btn btn-primary">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Agendar</button>
+    </div>
   </form>
 </template>
 
