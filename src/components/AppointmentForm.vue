@@ -5,7 +5,15 @@ const { onSubmit, state } = inject("state")
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit">
+  <div class="card text-dark bg-light p-2">
+    <!-- <div class="card-header">Header</div> -->
+    <div class="card-body">
+      Día: {{state.data.date}}
+      <br />
+      Hora: {{state.data.time}}
+    </div>
+  </div>
+  <form @submit.prevent="onSubmit" class="mt-2">
     <div class="mb-3">
       <label for="inputName" class="form-label">Nombre</label>
       <input

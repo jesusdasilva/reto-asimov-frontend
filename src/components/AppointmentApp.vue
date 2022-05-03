@@ -1,6 +1,6 @@
 <script setup>
 import moment from "moment"
-import { provide, ref, reactive } from "vue"
+import { provide, ref, reactive, onMounted } from "vue"
 import AppointmentCalendar from "@/components/AppointmentCalendar.vue"
 import AppointmentTime from "@/components/AppointmentTime.vue"
 import AppointmentForm from "@/components/AppointmentForm.vue"
@@ -18,32 +18,43 @@ const state = reactive({
     phone: "",
     email: "",
     time: "",
-    date: ""
+    date: moment('2022-01-05 00:00:00').format()
   }
 })
 
+// onMounted(() => {
+//   state.data.date = moment('2022-01-05 00:00:00').format()
+// })
+
 function onDayClick(date) {
-  console.log('date.date',date.date)
-  console.log('date',date)
-  setDisabledDay(date.day)
+  setDataDate(date)
+  console.log('state.startDate',state.data.date)
+  // setDisabledDay(date)
 }
 
 function onTimeClick(time) {
-  setDisabledTime(time.time)
+  setDataTime(time)
+  changeShowForm ()
 }
 
-function changeShowForm() {
-  // showForm.value = !showForm.value
-  state.startDate = moment('2022-05-10 00:00:00').format()
+function changeShowForm () {
+  showForm.value = !showForm.value
 }
 
-function setDisabledDay(day) {
+function setDisabledDay({day}) {
   state.disabledDates[1].days.push(day)
 }
 
 function onSubmit() {
-//   console.log(state.data)
   changeShowForm()
+}
+
+function setDataDate({id}){
+  state.data.date = moment(id).format('YYYY-MM-DD')
+}
+
+function setDataTime(time) {
+  state.data.time = time
 }
 
 provide("state", {
