@@ -7,24 +7,21 @@ import AppointmentForm from "@/components/AppointmentForm.vue"
 
 const showForm = ref(false)
 const state = reactive({
-  startDate: moment('2022-01-05 00:00:00').format(),
+  startDate: '',
   disabledDates: [{ weekdays: [1, 7] }, { days: [] }],
-  officeHours: {
-    start: "9:00",
-    end: "18:00"
-  },
   data: {
-    name: "",
-    phone: "",
-    email: "",
-    time: "",
-    date: moment('2022-01-05 00:00:00').format()
+    name: '',
+    phone: '',
+    email: '',
+    time: '',
+    date:''
   }
 })
 
-// onMounted(() => {
-//   state.data.date = moment('2022-01-05 00:00:00').format()
-// })
+onMounted(() => {
+  state.startDate = moment('2022-02-09').format('YYYY-MM-DD')
+  state.data.date = moment('2022-02-09').format('YYYY-MM-DD')
+})
 
 function onDayClick(date) {
   setDataDate(date)

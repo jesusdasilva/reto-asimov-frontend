@@ -12,6 +12,7 @@ const { state, onDayClick } = inject("state");
     :from-date="new Date(state.startDate)"
     :disabled-dates="state.disabledDates"
     @dayclick="onDayClick"
+    v-model="state.data.date"
   />
 </template>
 

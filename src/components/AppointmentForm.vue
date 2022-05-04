@@ -8,9 +8,9 @@ const { onSubmit, state } = inject("state")
   <div class="card text-dark bg-light p-2">
     <!-- <div class="card-header">Header</div> -->
     <div class="card-body">
-      Día: {{state.data.date}}
+      <span class="fw-bold">Día:</span> {{state.data.date}}
       <br />
-      Hora: {{state.data.time}}
+      <span class="fw-bold">Hora:</span> {{state.data.time}}
     </div>
   </div>
   <form @submit.prevent="onSubmit" class="mt-2">
@@ -46,10 +46,14 @@ const { onSubmit, state } = inject("state")
       />
     </div>
     <div>
-      <button type="reset" class="btn btn-primary">Cancelar</button>
-      <button type="submit" class="btn btn-primary">Agendar</button>
+      <button type="reset" class="btn btn-secondary float-start">Salir</button>
+      <button type="submit" class="btn btn-primary float-end">Agendar</button>
     </div>
   </form>
 </template>
 
-<style></style>
+<style>
+.btn {
+    min-width: 100px;
+}
+</style>
