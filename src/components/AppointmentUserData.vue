@@ -8,9 +8,9 @@ const { onSubmit, state } = inject("state")
   <div class="card text-dark bg-light p-2">
     <!-- <div class="card-header">Header</div> -->
     <div class="card-body">
-      <span class="fw-bold">Día:</span> {{state.data.date}}
+      <span class="fw-bold">Día:</span> {{state.userData.date}}
       <br />
-      <span class="fw-bold">Hora:</span> {{state.data.time}}
+      <span class="fw-bold">Hora:</span> {{state.userData.time}}
     </div>
   </div>
   <form @submit.prevent="onSubmit" class="mt-2">
@@ -22,7 +22,7 @@ const { onSubmit, state } = inject("state")
         id="inputName"
         aria-describedby="namelHelp"
         required
-        v-model="state.data.name"
+        v-model="state.userData.name"
       />
     </div>
     <div class="mb-3">
@@ -32,7 +32,7 @@ const { onSubmit, state } = inject("state")
         class="form-control"
         id="inputTelefono"
         aria-describedby="telefonoHelp"
-        v-model="state.data.phone"
+        v-model="state.userData.phone"
       />
     </div>
     <div class="mb-3">
@@ -42,18 +42,14 @@ const { onSubmit, state } = inject("state")
         class="form-control"
         id="inputEmail"
         required
-        v-model="state.data.email"
+        v-model="state.userData.email"
       />
-    </div>
-    <div>
-      <button type="reset" class="btn btn-secondary float-start">Salir</button>
-      <button type="submit" class="btn btn-primary float-end">Agendar</button>
     </div>
   </form>
 </template>
 
 <style>
-/* .btn {
+.btn {
     min-width: 100px;
-} */
+}
 </style>
