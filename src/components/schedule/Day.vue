@@ -1,7 +1,8 @@
 <script setup>
 import { inject} from "vue";
+import { calendarStore, userStore } from "@/store";
 
-const { state, onDayClick } = inject("state");
+const { onDayClick } = inject("state");
 
 // let attrs = reactive([
 //   {
@@ -16,10 +17,10 @@ const { state, onDayClick } = inject("state");
 <template>
   <calendar
     is-expanded
-    :min-date="state.startDate"
-    :disabled-dates="state.disabledDates"
+    :min-date="calendarStore.start"
+    :disabled-dates="calendarStore.disabledDates"
     @dayclick="onDayClick"
-    v-model="state.data.date"
+    v-model="userStore.date"
   />
 </template>
 

@@ -1,7 +1,7 @@
 <script setup>
 import { inject } from 'vue'
 
-const { onTimeClick, state } = inject('state')
+const { onTimeClick } = inject('state')
 
 </script>
 

@@ -1,51 +1,38 @@
 <script setup>
-import { inject } from "vue";
-import { toolbarStore } from "@/store";
+import { toolbarStore }  from "@/store";
 
-let { state } = inject("state");
-// let { step } = inject("step");
-
-function stepper(label) {
-  const changePosition = {
-    Regresar: - 1,
-    Siguiente: + 1,
-    Salir: 0
-  }
-
-  toolbarStore.step.changePosition(changePosition[label]);
-}
 </script>
 
 <template>
   <div class="pt-3 row">
     <div class="col-8 d-flex justify-content-start">
       <button
-        @click="stepper(state.toolbarData.backButton.label)"
+        @click="toolbarStore.step.previous()"
         type="button"
         class="btn btn-secondary"
-        v-show="state.toolbarData.backButton.show"
+        v-show="toolbarStore.backButton.show"
       >
-        {{ state.toolbarData.backButton.label }}
+        {{ toolbarStore.backButton.label }}
       </button>
     </div>
     <div class="col-2 d-flex justify-content-start">
       <button
-        @click="stepper(state.toolbarData.cancelButton.label)"
+        @click="toolbarStore.step.cancel()"
         type="button"
         class="btn btn-warning"
-        v-show="state.toolbarData.cancelButton.show"
+        v-show="toolbarStore.cancelButton.show"
       >
-        {{ state.toolbarData.cancelButton.label }}
+        {{ toolbarStore.cancelButton.label }}
       </button>
     </div>
     <div class="col-2 d-flex justify-content-end">
       <button
-        @click="stepper(state.toolbarData.nextButton.label)"
+        @click="toolbarStore.step.next()"
         type="button"
         class="btn btn-primary"
-        v-show="state.toolbarData.nextButton.show"
+        v-show="toolbarStore.nextButton.show"
       >
-        {{ state.toolbarData.nextButton.label }}
+        {{ toolbarStore.nextButton.label }}
       </button>
     </div>
   </div>
