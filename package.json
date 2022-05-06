@@ -7,9 +7,12 @@
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
+    "@vee-validate/i18n": "^4.5.11",
     "moment": "^2.29.3",
     "v-calendar": "^3.0.0-alpha.8",
-    "vue": "^3.2.33"
+    "vee-validate": "^4.5.11",
+    "vue": "^3.2.33",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",

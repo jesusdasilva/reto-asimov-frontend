@@ -33,6 +33,9 @@ export const toolbarStore = reactive({
   },
   step: {
     current: 0,
+    setCurrent(value) {
+      toolbarStore.step.current = value;
+    },
     next() {
       toolbarStore.step.current = (toolbarStore.step.current === 3) ? 0 : toolbarStore.step.current+1;
     },
