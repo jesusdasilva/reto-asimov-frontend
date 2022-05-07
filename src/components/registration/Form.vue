@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, watchEffect } from "vue";
+import { onUnmounted, watchEffect } from "vue";
 import { userStore, toolbarStore } from "@/store";
 import { useField } from "vee-validate";
 import * as yub from "yup";
@@ -10,9 +10,9 @@ const { value: telephone, errorMessage: telephoneError } = useField("email", yub
 const { value: email, errorMessage: emailError } = useField("email", yub.string().email("Debe ser un Email válido").required("El Email es requerido"));
 
 watchEffect(() => {
-  toolbarStore.nextButton.setShow(false);
+  toolbarStore.nextButton.setDisable(true);
   if (!emailError.value && email.value && !firstNameError.value && firstName.value && !lastNameError.value && lastName.value){
-    toolbarStore.nextButton.setShow(true);
+    toolbarStore.nextButton.setDisable(false);
   }
 })
 
@@ -70,4 +70,4 @@ onUnmounted(() => {
   </form>
 </template>
 
-<style></style>
+<style scope></style>

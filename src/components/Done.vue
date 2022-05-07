@@ -5,9 +5,10 @@ import VDetail from "@/components/done/Detail.vue";
 import VTip from "@/components/done/tip.vue";
 
 onMounted(() => {
-  toolbarStore.backButton.setShow(false);
   toolbarStore.cancelButton.setShow(false);
+  toolbarStore.nextButton.setLabel('Terminar');
   toolbarStore.nextButton.setShow(true);
+  toolbarStore.nextButton.setDisable(false);
 });
 </script>
 

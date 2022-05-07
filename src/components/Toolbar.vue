@@ -1,37 +1,40 @@
 <script setup>
-import { toolbarStore }  from "@/store";
+import { computed } from "vue";
+import { toolbarStore } from "@/store";
 
+const nextIcon = computed(() => {
+  const type = {
+    Agendar: "bi-clipboard-check",
+    Horarios: "bi-calendar3",
+    Terminar: "bi-check2-square"
+  };
+
+  return type[toolbarStore.nextButton.label];
+});
 </script>
 
 <template>
   <div class="pt-3 row">
-    <div class="col-8 d-flex justify-content-start">
-      <button
-        @click="toolbarStore.step.previous()"
-        type="button"
-        class="btn btn-secondary"
-        v-show="toolbarStore.backButton.show"
-      >
-        {{ toolbarStore.backButton.label }}
-      </button>
-    </div>
-    <div class="col-2 d-flex justify-content-start">
+    <div class="col-6 d-flex justify-content-start">
       <button
         @click="toolbarStore.step.cancel()"
         type="button"
         class="btn btn-warning"
         v-show="toolbarStore.cancelButton.show"
       >
+        <i class="bi bi-door-closed"></i>
         {{ toolbarStore.cancelButton.label }}
       </button>
     </div>
-    <div class="col-2 d-flex justify-content-end">
+    <div class="col-6 d-flex justify-content-end">
       <button
         @click="toolbarStore.step.next()"
         type="button"
         class="btn btn-primary"
         v-show="toolbarStore.nextButton.show"
+        :disabled="toolbarStore.nextButton.disable"
       >
+        <i class="bi" :class="nextIcon"></i>
         {{ toolbarStore.nextButton.label }}
       </button>
     </div>

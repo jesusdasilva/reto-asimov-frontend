@@ -1,16 +1,6 @@
 import { reactive } from "vue"
 
 export const toolbarStore = reactive({
-  backButton: {
-    label: "Regresar",
-    show: false,
-    setLabel(value) {
-      toolbarStore.backButton.label = value;
-    },
-    setShow(value) {
-      toolbarStore.backButton.show = value;
-    },
-  },
   cancelButton: {
     label: "Salir",
     show: false,
@@ -19,17 +9,21 @@ export const toolbarStore = reactive({
     },
     setShow(value) {
       toolbarStore.cancelButton.show = value;
-    }
+    },
   },
   nextButton: {
-    label: "Registro",
+    label: "Agendar",
     show: true,
+    disable: false,
     setLabel(value) {
       toolbarStore.nextButton.label = value;
     },
     setShow(value) {
       toolbarStore.nextButton.show = value;
-    }
+    },
+    setDisable(value) {
+      toolbarStore.nextButton.disable = value;
+    },
   },
   step: {
     current: 0,
@@ -42,9 +36,6 @@ export const toolbarStore = reactive({
     cancel() {
       toolbarStore.step.current = 0;
     },
-    previous() {  
-      toolbarStore.step.current--;
-    }
   }
 })
 

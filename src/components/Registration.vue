@@ -5,12 +5,11 @@ import VRequired from "@/components/registration/required.vue";
 import VForm from "@/components/registration/Form.vue";
 
 onMounted(() => {
-  toolbarStore.backButton.setLabel("Instrucciones");
-  toolbarStore.backButton.setShow(true);
   toolbarStore.cancelButton.setLabel("Salir");
   toolbarStore.cancelButton.setShow(true);
-  toolbarStore.nextButton.setLabel("Agendar");
-  toolbarStore.nextButton.setShow(false);
+  toolbarStore.nextButton.setLabel("Horarios");
+  toolbarStore.nextButton.setShow(true);
+  toolbarStore.nextButton.setDisable(true);
 
   userStore.reset();
 });
