@@ -56,7 +56,7 @@ export const userStore = reactive({
   email: "",
   telephone: "",
   date: "",
-  time: "",
+  hour: "",
   setFirstName(value) {
     userStore.firstName = value;
   },
@@ -72,8 +72,8 @@ export const userStore = reactive({
   setDate(value) {
     userStore.date = value;
   },
-  setTime(value) {
-    userStore.time = value;
+  setHour(value) {
+    userStore.hour = value;
   },
   getData() {
     return userStore;
@@ -84,6 +84,6 @@ export const userStore = reactive({
     userStore.email = "";
     userStore.telephone = "";
     userStore.date = "";
-    userStore.time = "";
+    userStore.hour = "";
   },
 })

@@ -7,7 +7,7 @@ import VSchedule from "@/components/Schedule.vue";
 import VToolbar from "@/components/Toolbar.vue";
 import VDone from "@/components/Done.vue";
 import { toolbarStore, userStore } from "@/store";
-
+import axios from "axios"
 
 onMounted(() => {
   // console.log(moment(state.userData.date).format("YYYY-MM-DD"));
@@ -16,12 +16,28 @@ onMounted(() => {
 
 function onDayClick(date) {
   setDataDate(date);
-  // setDisabledDay(date)
+  setDisabledDay(date)
+
 }
 
-function onTimeClick(time) {
-  userStore.setTime(time);
-  toolbarStore.step.next();
+async function onTimeClick(time) {
+  
+  userStore.setHour(time);
+  await saveReservation() && toolbarStore.step.next();
+}
+
+async function saveReservation() {
+
+  const params = {
+    rFirstName: userStore.firstName,
+    rLastName: userStore.lastName,
+    rEmail: userStore.email,
+    rPhone: userStore.phone,
+    rDate: userStore.date,
+    rHour: userStore.hour
+    }
+console.log(params)
+  return await axios.post("http://localhost:3000/api/v1/reservation/", params);
 }
 
 function changeShowForm() {
@@ -41,7 +57,7 @@ function setDataDate({ id }) {
 }
 
 function setDataTime(time) {
-  // state.userData.time = time;
+  // state.userData.hour = time;
 }
 
 provide("state", {
@@ -51,7 +67,6 @@ provide("state", {
   changeShowForm,
   onSubmit
 });
-
 </script>
 
 <template>
@@ -59,7 +74,7 @@ provide("state", {
     <v-welcome v-if="toolbarStore.step.current === 0" />
     <v-registration v-if="toolbarStore.step.current === 1" />
     <v-schedule v-if="toolbarStore.step.current === 2" />
-    <v-done v-if="toolbarStore.step.current === 3"/>
+    <v-done v-if="toolbarStore.step.current === 3" />
     <v-toolbar />
   </div>
 </template>
