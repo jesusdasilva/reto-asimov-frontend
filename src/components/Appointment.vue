@@ -56,6 +56,7 @@ async function saveReservation() {
     rHour: userStore.hour
   };
   console.log(params);
+  
   return await httpClient.post(
     "http://localhost:3000/api/v1/reservation/",
     params
