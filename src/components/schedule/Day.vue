@@ -5,10 +5,12 @@ import { calendarStore, userStore } from "@/store";
 const { onDayClick, initCalendar } = inject("state");
 const cCalendar = ref(null);
 
+// Change month event
 function onChangeMonth(){
   const { month, year } = cCalendar.value.pages[0]
   const fromDate = new Date(`${year}-${month}-01`);
 
+  // Reset calendar
   initCalendar(fromDate);
 }
 

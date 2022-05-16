@@ -4,7 +4,7 @@ import Appointment from "./components/Appointment.vue";
 
 <template>
   <header>
-    <h1 class="text-center">Sistema de Citas</h1>
+    <h1 class="text-center mt-5 fw-bold fs-1">SISTEMA DE CITAS</h1>
   </header>
 
   <main>

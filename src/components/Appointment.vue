@@ -1,6 +1,6 @@
 <script setup>
 import moment from "moment";
-import { provide, ref, reactive, onMounted, isShallow } from "vue";
+import { provide, reactive } from "vue";
 import VWelcome from "@/components/Welcome.vue";
 import VRegistration from "@/components/Registration.vue";
 import VSchedule from "@/components/Schedule.vue";
@@ -9,6 +9,7 @@ import VDone from "@/components/Done.vue";
 import { toolbarStore, userStore, calendarStore, hourStore } from "@/store";
 import axios from "axios";
 
+// API
 const URL_BASE = "http://localhost:5000";
 const API_V1_RESERVATION = "/api/v1/reservation";
 const API_V1_RESERVATION_DISABLED_DAYS = API_V1_RESERVATION + "/disabled-days";
@@ -19,12 +20,10 @@ const httpClient = axios.create({
   headers: { "Content-Type": "application/json" }
 });
 
+// Buttons Hours
 const state = reactive({ isShowHours: false });
 
-onMounted(() => {
-  // console.log(moment(state.userData.date).format("YYYY-MM-DD"));
-});
-
+// Check if the user has reservation
 async function checkUser(rEmail){
   const params = (() =>  { const { rYear, rMonth, rDay } = splitDate(new Date()); return { rEmail, rYear, rMonth, rDay };})()
   const { data: { data } } = await httpClient(API_V1_RESERVATION_ACTIVE, {params});
@@ -32,36 +31,25 @@ async function checkUser(rEmail){
 return data.length === 0;
 }
 
+// Helper
 function splitDate(date) {
   return {
     rYear: moment(date).format("YYYY"),
-    rMonth: moment(date).format("MM"),
-    rDay: moment(date).format("DD")
+    rMonth: (+moment(date).format("MM")).toString(),
+    rDay: (+moment(date).format("DD")).toString()
   };
 }
 
-// function calculateStartDate(fromDate = '') {
-//   const DEFAULT_DATE = fromDate ? new Date(fromDate) : new Date(null);
-
-//   const START_DATE = {
-//     Saturday: moment(DEFAULT_DATE).add(2, "days"),
-//     Sunday: moment(DEFAULT_DATE).add(1, "days"),
-//   };
-
-//   return START_DATE[moment(DEFAULT_DATE).format("dddd")]?._d || DEFAULT_DATE;
-// }
-
+// Config calendar
 async function initCalendar(fromDate = '') {
   state.isShowHours = false; hourStore.reset();
 
-  const startDate = new Date();//calculateStartDate(fromDate);
+  const startDate = new Date();
 
   calendarStore.reset();
   calendarStore.setStart(startDate);
   calendarStore.setDisabledDays([{ weekdays: [1, 7] }, { days: [] }]);
 
-  // userStore.setDate(moment(startDate).format("YYYY-MM-DD"));
-  
   const startMonth = fromDate ? new Date(fromDate) : new Date();
   const params = (() => { const { rYear, rMonth } = splitDate(startMonth); return { rYear, rMonth }; })();
   const { data: { data } } = await httpClient(API_V1_RESERVATION_DISABLED_DAYS, { params });
@@ -69,6 +57,7 @@ async function initCalendar(fromDate = '') {
   data.forEach((e) => calendarStore.disabledDays[1].days.push(parseInt(e.r_day)));
 }
 
+// Config hours
 async function onDayClick({ date }) {
   state.isShowHours = false; hourStore.reset();
 
@@ -82,84 +71,52 @@ async function onDayClick({ date }) {
   state.isShowHours = true;
 }
 
-// function onChangeMonth(event) {
-  // const { rYear, rMonth } = splitDate(date);
-  // const params = { rYear, rMonth };
-  // const {
-  //   data: { data }
-  // } = await httpClient(API_V1_RESERVATION_DISABLED_DAYS, { params });
-
-  // calendarStore.disabledDays[1].days = [];
-  // data.forEach((e) =>
-  //   calendarStore.disabledDays[1].days.push(parseInt(e.r_day))
-  // );
-  // console.log('onChangeMonth',this.$refs.calendar)
-// }
-
+// Save reservation
 async function onTimeClick(time) {
-  console.log(time);
-  console.log(userStore.getDate())
   userStore.setHour(time);
+
   (await saveReservation()) && toolbarStore.step.next();
 }
 
+// Save reservation API
 async function saveReservation() {
-  const [rYear, rMonth, rDay] = userStore.getDate().split("-");
+  const [rYear, _rMonth, _rDay] = userStore.getDate().split("-");
   const params = {
     rFirstName: userStore.firstName,
     rLastName: userStore.lastName,
     rEmail: userStore.email,
     rPhone: userStore.phone,
     rYear,
-    rMonth,
-    rDay,
+    rMonth: (+_rMonth).toString(),
+    rDay: (+_rDay).toString(),
     rHour: userStore.hour
   };
-  console.log(params);
+
   return await httpClient.post(API_V1_RESERVATION+'/', params );
 }
 
-function changeShowForm() {
-  // showForm.value = !showForm.value;
-}
-
-function setDisabledDay({ day }) {
-  // state.disabledDates[1].days.push(day);
-}
-
-function onSubmit() {
-  changeShowForm();
-}
-
-function setDataDate({ id }) {
-  // state.userData.date = id;
-}
-
-function setDataTime(time) {
-  // state.userData.hour = time;
-}
-
+// provider/inject
 provide("state", {
   state,
   checkUser,
   onDayClick,
   onTimeClick,
-  changeShowForm,
-  onSubmit,
   initCalendar,
 });
 </script>
 
 <template>
   <div class="container">
-    <v-welcome v-if="toolbarStore.step.current === 0" />
-    <v-registration
-      v-if="toolbarStore.step.current === 1 || toolbarStore.step.current === 2"
-    />
-    <v-schedule v-if="toolbarStore.step.current === 3" />
-    <v-done v-if="toolbarStore.step.current === 4" />
-    <v-toolbar />
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <v-welcome v-if="toolbarStore.step.current === 0" />
+        <v-registration v-if="toolbarStore.step.current === 1 || toolbarStore.step.current === 2" />
+        <v-schedule v-if="toolbarStore.step.current === 3" />
+        <v-done v-if="toolbarStore.step.current === 4" />
+        <v-toolbar />
+      </div>
+    </div>
   </div>
 </template>
 
-<style></style>
+<style scoped></style>

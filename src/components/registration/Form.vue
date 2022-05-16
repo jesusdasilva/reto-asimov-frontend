@@ -4,7 +4,7 @@ import { userStore, toolbarStore } from "@/store";
 import { useField } from "vee-validate";
 import * as yub from "yup";
 
-// schema validate
+// Schema validate
 const { value: firstName, errorMessage: firstNameError } = useField("firstName", yub.string().required("El Nombre es requerido").defined());
 const { value: lastName, errorMessage: lastNameError } = useField("lastName", yub.string().required("El Apellido es requerido").defined());
 const { value: telephone, errorMessage: telephoneError } = useField("email", yub.string().nullable().default(""));
@@ -17,28 +17,30 @@ let isShowAlert = ref(false);
 watchEffect(() => {
   toolbarStore.nextButton.setDisable(true);
 
-  //validate form
+  // Validate form
   if (!emailError.value && email.value && !firstNameError.value && firstName.value && !lastNameError.value && lastName.value) {
     toolbarStore.nextButton.setDisable(false);
   }
 
-  //check user
+  // Check user
   if (toolbarStore.step.current === 2) {
     continueOrMessage()
   }
 
 });
 
+// Check user
 async function continueOrMessage(){
   (await checkUser(email.value)) ? (toolbarStore.step.next()) : (isShowAlert.value = true)
 }
 
+// Close message alert
 function closeAlert(){
   toolbarStore.step.setCurrent(0);
 }
 
 onUnmounted(() => {
-  // assing store values
+  // Assing store values
   userStore.setFirstName(firstName.value);
   userStore.setLastName(lastName.value);
   userStore.setEmail(email.value);

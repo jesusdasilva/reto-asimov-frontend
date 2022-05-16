@@ -5,13 +5,16 @@ import VCallout from "@/components/Callout.vue"
 <template>
   <v-callout>
       <h3 id="scrollable-containers-and-keyboard-access">
-        Scrollable containers and keyboard access
+        Información de contacto
       </h3>
       <p>
-        If youre making a scrollable container (other than the
-        <code>&lt;body&gt;</code>), be sure to have a <code>height</code> set
-        and <code>overflow-y: scroll;</code> applied to it—alongside a
-        <code>tabindex="0"</code> to ensure keyboard access.
+        Debe ingresar los datos que se le solicitan a continuación para realizar el registro.
+        El <strong>Nombre</strong>, <strong>Teléfono</strong> e <strong>Email</strong> son obligatorios.
+        Una vez que complete la información, se activará el botón "<span class="fst-italic">Horarios</span>" y podrá continuar
+        con la selección del día y la hora.
+      </p>
+      <p>
+        Si no desea continuar con el registro debe hacer click en el botón "<span class="fst-italic">Salir</span>".
       </p>
   </v-callout>
 </template>

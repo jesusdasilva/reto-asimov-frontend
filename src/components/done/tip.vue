@@ -4,9 +4,11 @@ import VCallout from "@/components/Callout.vue";
 
 <template>
   <v-callout>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, soluta, sed
-    non quisquam possimus odio mollitia hic qui id dolore recusandae cupiditate
-    accusantium debitis amet nam eligendi modi reprehenderit incidunt.
+    <h3 id="scrollable-containers-and-keyboard-access">
+      Felicitaciones
+    </h3>
+    Ya fué agendada su cita con los datos que suministró. Recuerde estar medía
+    hora antes para poder ingresar a la sala de espera.
   </v-callout>
 </template>
 

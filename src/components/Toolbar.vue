@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import { toolbarStore } from "@/store";
 
+// Assign icons to toolbar buttons
 const nextIcon = computed(() => {
   const type = {
     Agendar: "bi-clipboard-check",

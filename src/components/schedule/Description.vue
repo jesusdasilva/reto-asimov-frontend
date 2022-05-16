@@ -5,13 +5,15 @@ import VCallout from "@/components/Callout.vue"
 <template>
   <v-callout>
       <h3 id="scrollable-containers-and-keyboard-access">
-        Scrollable containers and keyboard access
+        Calendario de Días y Horas disponibles.
       </h3>
       <p>
-        If youre making a scrollable container (other than the
-        <code>&lt;body&gt;</code>), be sure to have a <code>height</code> set
-        and <code>overflow-y: scroll;</code> applied to it—alongside a
-        <code>tabindex="0"</code> to ensure keyboard access.
+        A continuación se muestran los meses y días disponibles para la reservación de horas.
+        Elija Un día para que se muestren los Horarios disponibles.
+        Al seleccionar un hora se guardará la reserva de la cita, con el día y la hora seleccionada.
+      </p>
+      <p>
+        Si no desea continuar con el registro debe hacer click en el botón "<span class="fst-italic">Salir</span>".
       </p>
   </v-callout>
 </template>
