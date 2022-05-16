@@ -31,7 +31,7 @@ export const toolbarStore = reactive({
       toolbarStore.step.current = value;
     },
     next() {
-      toolbarStore.step.current = (toolbarStore.step.current === 3) ? 0 : toolbarStore.step.current+1;
+      toolbarStore.step.current = (toolbarStore.step.current === 4) ? 0 : toolbarStore.step.current+1;
     },
     cancel() {
       toolbarStore.step.current = 0;
@@ -41,13 +41,34 @@ export const toolbarStore = reactive({
 
 export const calendarStore = reactive({
   start: null,
-  disabledDates: [],
+  disabledDays: [],
   setStart(value) {
     calendarStore.start = value;
   },
-  setDisabledDates(value) {
-    calendarStore.disabledDates = value;
+  setDisabledDays(value) {
+    calendarStore.disabledDays = value;
   },
+  getDisabledDays() {
+    return calendarStore.disabledDays;
+  },
+  reset() {
+    calendarStore.start = null;
+    calendarStore.disabledDays = [];
+    hourStore.reset();
+  }
+})
+
+export const hourStore = reactive({
+  disabledHours:[],
+  setDisabledHours(value) {
+    hourStore.disabledHours.push({rHour:value});
+  },
+  getDisabledHours() {
+    return hourStore.disabledHours;
+  },
+  reset() {
+    hourStore.disabledHours = [];
+  }
 })
 
 export const userStore = reactive({
@@ -74,6 +95,9 @@ export const userStore = reactive({
   },
   setHour(value) {
     userStore.hour = value;
+  },
+   getDate(){
+    return userStore.date;
   },
   getData() {
     return userStore;

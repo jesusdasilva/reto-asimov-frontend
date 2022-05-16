@@ -1,26 +1,28 @@
 <script setup>
-import { inject} from "vue";
+import { inject, ref } from "vue";
 import { calendarStore, userStore } from "@/store";
 
-const { onDayClick } = inject("state");
+const { onDayClick, initCalendar } = inject("state");
+const cCalendar = ref(null);
 
-// let attrs = reactive([
-//   {
-//     key: "selected",
-//     highlight: true,
-//     dates: state.data.date
-//   }
-// ])
+function onChangeMonth(){
+  const { month, year } = cCalendar.value.pages[0]
+  const fromDate = new Date(`${year}-${month}-01`);
+
+  initCalendar(fromDate);
+}
 
 </script>
 
 <template>
   <calendar
+    ref="cCalendar"
     is-expanded
     :min-date="calendarStore.start"
-    :disabled-dates="calendarStore.disabledDates"
+    :disabled-dates="calendarStore.disabledDays"
     @dayclick="onDayClick"
     v-model="userStore.date"
+    @transition-start="onChangeMonth"
   />
 </template>
 
