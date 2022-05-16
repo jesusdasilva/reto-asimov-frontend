@@ -10,7 +10,7 @@ import { toolbarStore, userStore, calendarStore, hourStore } from "@/store";
 import axios from "axios";
 
 // API
-const URL_BASE = "http://localhost:5000";
+const URL_BASE = "https://retoasimov-middleware.orinokia.ca";
 const API_V1_RESERVATION = "/api/v1/reservation";
 const API_V1_RESERVATION_DISABLED_DAYS = API_V1_RESERVATION + "/disabled-days";
 const API_V1_RESERVATION_DISABLED_HOURS = API_V1_RESERVATION + "/disabled-hours";
